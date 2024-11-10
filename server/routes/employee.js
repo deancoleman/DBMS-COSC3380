@@ -25,7 +25,7 @@ router.get('/', async (req, res) => {
         // console.log('Attempting to fetch employees...');
         const [rows] = await pool.query(`
             SELECT *
-            FROM employee
+            FROM Employee
         `);
         // console.log('Successfully fetched employees:', rows.length);
         res.json(rows);

@@ -9,7 +9,7 @@ router.post('/admin/login', async (req, res) => {
         const { firstName, lastName, employeeId } = req.body;
         
         const [employees] = await pool.query(
-            'SELECT * FROM employee WHERE Employee_ID = ? AND First_Name = ? AND Last_Name = ?',
+            'SELECT * FROM Employee WHERE Employee_ID = ? AND First_Name = ? AND Last_Name = ?',
             [employeeId, firstName, lastName]
         );
 
@@ -53,7 +53,7 @@ router.post('/customer/login', async (req, res) => {
         const { phoneNumber } = req.body;
         
         const [customers] = await pool.query(
-            'SELECT * FROM customer WHERE Phone_Number = ?',
+            'SELECT * FROM Customer WHERE Phone_Number = ?',
             [phoneNumber]
         );
 

@@ -1,4 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
+import './Navbar.css';
 
 const Navbar = () => {
   const userRole = localStorage.getItem('userRole');
@@ -15,13 +16,12 @@ const Navbar = () => {
     return (
       <nav>
         <div>
-          <Link to="/">Ice Cream Shop</Link>
-
+          <Link to="/" className="nav-link">Ice Cream Shop</Link>
           <div>
-            <Link to="/">Home</Link>
-            <Link to="/shop">Shop</Link>
-            <Link to="/about">About Us</Link>
-            <Link to="/login">Login</Link>
+          <Link to="/" className="nav-link">Home</Link>
+          <Link to="/shop" className="nav-link">Shop</Link>
+          <Link to="/about" className="nav-link">About Us</Link>
+          <Link to="/login" className="nav-link">Login</Link>
           </div>
         </div>
       </nav>
@@ -33,13 +33,13 @@ const Navbar = () => {
     return (
       <nav>
         <div>
-          <Link to="/">Ice Cream Shop</Link>
+          <Link to="/" className="nav-link">Ice Cream Shop</Link>
 
           <div>
             <Link to="/">Home</Link>
-            <Link to="/shop">Shop</Link>
-            <Link to="/about">About Us</Link>
-            <Link to="/customer/dashboard">My Account</Link>
+            <Link to="/shop" className="nav-link">Shop</Link>
+            <Link to="/about" className="nav-link">About Us</Link>
+            <Link to="/customer/dashboard" className="nav-link">My Account</Link>
             {/* Add cart link if you have shopping cart feature */}
             {/* <Link to="/cart">Cart</Link> */}
             <button onClick={handleLogout}>Logout</button>
@@ -54,13 +54,13 @@ const Navbar = () => {
     return (
       <nav>
         <div>
-          <Link to="/">Ice Cream Shop</Link>
+          <Link to="/" className="nav-link">Ice Cream Shop</Link>
 
           <div>
-            <Link to="/">Home</Link>
-            <Link to="/admin/dashboard">Manage Products</Link>
-            <Link to="/vendors">Vendors</Link>
-            <Link to="/reports">Reports</Link>
+            <Link to="/" className="nav-link">Home</Link>
+            <Link to="/admin/dashboard" className="nav-link">Manage Products</Link>
+            <Link to="/vendors" className="nav-link">Vendors</Link>
+            <Link to="/reports" className="nav-link">Reports</Link>
             <button onClick={handleLogout}>Logout</button>
           </div>
         </div>

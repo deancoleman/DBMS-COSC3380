@@ -15,7 +15,7 @@ router.get('/customer/account', authMiddleware, async (req, res) => {
       // Log the SQL query we're about to execute
       const query = `
         SELECT 	c.Customer_ID, c.Membership_Level, c.Phone_Number, c.Account_Creation_Date, c.Total_Accrued_Discount_Points, c.Discount_Points_Used
-        FROM customer c
+        FROM Customer c
         WHERE c.Customer_ID = ?
       `;
 

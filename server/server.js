@@ -3,6 +3,7 @@ const path = require('path');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 const app = express();
+const {testConnection} = require('./config/db');
 
 // Load environment variables
 require('dotenv').config();
@@ -29,12 +30,16 @@ const employeeRouter = require('./routes/employee');
 const authRouter = require('./routes/auth');
 const itemsRouter = require('./routes/shop');
 const customerRouter = require('./routes/customers');
+const reportRouter = require('./routes/reports');
+//const reportRouter = require('./services/reportServer'); 
 
 // Use Routes
 app.use('/shop', itemsRouter);
 app.use('/auth', authRouter);
 app.use('/employee', employeeRouter);
 app.use('/acc', customerRouter);
+app.use('/reports', reportRouter)
+
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -60,8 +65,13 @@ if (process.env.NODE_ENV === 'production') {
   // Server startup
   const PORT = process.env.PORT || 5000;
   if (process.env.NODE_ENV !== 'production') {
-    app.listen(PORT, () => {
+    app.listen(PORT, async () => {
       console.log(`Server is running on http://localhost:${PORT}`);
+      const dbConnected = await testConnection();
+      if (!dbConnected) {
+        console.error('Database connection failed, exiting...');
+        process.exit(1); // Exit the process if connection fails
+      }
     });
   }
   

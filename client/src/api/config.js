@@ -12,6 +12,10 @@ const API_CONFIG = {
       },
       SHOP: {
         FLAVORS: '/shop/all-flavors'
+      },
+      REPORTS: {
+        MONTHLY_SALES: '/api/reports/monthly-sales', //for 1st and second report
+        ITEM_AGGREGATE: '/api/reports/item-aggregate' // For the third report
       }
     },
     HEADERS: {

@@ -6,7 +6,7 @@ const { pool } = require('../config/db');
 router.get('/all-flavors/:id', async (req, res) => {
     try {
         const [rows] = await pool.query(
-            'SELECT * FROM food_item WHERE Item_ID = ?',
+            'SELECT * FROM Food_Item WHERE Item_ID = ?',
             [req.params.id]
         );
         

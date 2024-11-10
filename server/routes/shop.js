@@ -5,7 +5,7 @@ const { pool } = require('../config/db');
 // Get all items
 router.get('/all-flavors', async (req, res) => {
     try {
-        const [rows] = await pool.query('SELECT * FROM item');
+        const [rows] = await pool.query('SELECT * FROM Item');
         res.json(rows);
     } catch (error) {
         console.error('Error fetching items:', error);
@@ -17,7 +17,7 @@ router.get('/all-flavors', async (req, res) => {
 router.get('/all-flavors/:id', async (req, res) => {
     try {
         const [rows] = await pool.query(
-            'SELECT * FROM food_item WHERE Item_ID = ?',
+            'SELECT * FROM Food_Item WHERE Item_ID = ?',
             [req.params.id]
         );
         
