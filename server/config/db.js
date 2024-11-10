@@ -1,4 +1,4 @@
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
 require('dotenv').config();
 
 console.log('Attempting to create database connection pool...');
@@ -23,7 +23,7 @@ const pool = mysql.createPool({
     ssl: {
         rejectUnauthorized: false
     }
-}).promise();
+});
 
 
 // Testing connection (/test)

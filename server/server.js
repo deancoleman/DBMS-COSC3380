@@ -38,7 +38,7 @@ app.use('/shop', itemsRouter);
 app.use('/auth', authRouter);
 app.use('/employee', employeeRouter);
 app.use('/acc', customerRouter);
-app.use('/reports', reportRouter)
+app.use('/api/reports', reportRouter)
 
 
 // Error handling middleware

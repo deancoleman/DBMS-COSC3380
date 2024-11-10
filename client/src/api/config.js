@@ -15,7 +15,8 @@ const API_CONFIG = {
       },
       REPORTS: {
         MONTHLY_SALES: '/api/reports/monthly-sales', //for 1st and second report
-        ITEM_AGGREGATE: '/api/reports/item-aggregate' // For the third report
+        ITEM_AGGREGATE: '/api/reports/item-aggregate', // For the third report
+        FLAVORS: '/api/reports/flavors'
       }
     },
     HEADERS: {
