@@ -95,10 +95,18 @@ const transactionQueries = {
         SELECT 
             i.Item_ID,
             i.Item_Name,
+            i.Quantity as Current_Stock,
             COUNT(il.Log_ID) as Total_Changes,
-            SUM(CASE WHEN il.Action_Type = 'SALE' THEN il.Quantity_Changed ELSE 0 END) as Total_Sold,
-            SUM(CASE WHEN il.Action_Type = 'REORDER' THEN il.Quantity_Changed ELSE 0 END) as Total_Restocked,
-            i.Quantity as Current_Stock
+            ABS(SUM(CASE 
+                WHEN il.Action_Type = 'MANUAL_UPDATE' AND il.Quantity_Changed < 0 
+                THEN il.Quantity_Changed 
+                ELSE 0 
+            END)) as Total_Sold,
+            SUM(CASE 
+                WHEN il.Action_Type IN ('REORDER', 'MANUAL_UPDATE') AND il.Quantity_Changed > 0 
+                THEN il.Quantity_Changed 
+                ELSE 0 
+            END) as Total_Restocked
         FROM item i
         LEFT JOIN inventory_log il ON i.Item_ID = il.Item_ID
         GROUP BY i.Item_ID, i.Item_Name, i.Quantity
