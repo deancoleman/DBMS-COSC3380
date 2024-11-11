@@ -3,6 +3,7 @@ import TimeFoodItemBarChart from '../../components/charts/TimeFoodItemBarChart';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { reportService } from '../../api/services/report.service';
+import './FlavorReportPage.css';
 
 const FlavorReportPage = () => {
   const [data, setData] = useState({});
@@ -44,70 +45,71 @@ const FlavorReportPage = () => {
 
   // Trigger data fetch on initial load or when dates or selected flavors change
   useEffect(() => {
-    if (selectedFlavors.length > 0) {
-      fetchData();
-    }
-  }, [fetchData]);
+    fetchData();
+  }, [fetchData, selectedFlavors.length]); // Adding selectedFlavors.length as a dependency
+
 
   if (error) return <div>{error}</div>;
 
   return (
     <div>
-      <h1>Flavor Sales Report</h1>
-      <div>
-        <label>Start Date: </label>
-        <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
-        <label>End Date: </label>
-        <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} />
-        <button onClick={fetchData}>Generate Report</button>
-      </div>
-
-      <div>
-        <h2>Select Flavors</h2>
-        {allFlavors.map(flavor => (
-          <label key={flavor}>
-            <input
-              type="checkbox"
-              checked={selectedFlavors.includes(flavor)}
-              onChange={() => {
-                setSelectedFlavors(prev => 
-                  prev.includes(flavor) 
-                    ? prev.filter(f => f !== flavor) 
-                    : [...prev, flavor]
-                );
-              }}
-            />
-            {flavor}
-          </label>
-        ))}
-      </div>
-
-      <div>
-        <label>
-          <input
-            type="checkbox"
-            checked={showVolume}
-            onChange={() => setShowVolume(prev => !prev)}
-          />
-          Show Volume
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={showRevenue}
-            onChange={() => setShowRevenue(prev => !prev)}
-          />
-          Show Revenue
-        </label>
-      </div>
-
-      {/* Render a chart for each selected flavor */}
-      {Object.keys(data).map(flavor => (
-        <div key={flavor}>
-          <h3>{flavor}</h3>
-          <TimeFoodItemBarChart data={data[flavor]} showVolume={showVolume} showRevenue={showRevenue} />
+        <h1>Flavor Sales Report</h1>
+        <div>
+            <label>Start Date: </label>
+            <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+            <label>End Date: </label>
+            <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} />
+            <button onClick={fetchData}>Generate Report</button>
         </div>
-      ))}
+
+        <div>
+            <h2>Select Flavors</h2>
+            {allFlavors.map(flavor => (
+            <label key={flavor}>
+                <input
+                type="checkbox"
+                checked={selectedFlavors.includes(flavor)}
+                onChange={() => {
+                    setSelectedFlavors(prev => 
+                    prev.includes(flavor) 
+                        ? prev.filter(f => f !== flavor) 
+                        : [...prev, flavor]
+                    );
+                }}
+                />
+                {flavor}
+            </label>
+            ))}
+        </div>
+
+        <div>
+            <label>
+            <input
+                type="checkbox"
+                checked={showVolume}
+                onChange={() => setShowVolume(prev => !prev)}
+            />
+            Show Volume
+            </label>
+            <label>
+            <input
+                type="checkbox"
+                checked={showRevenue}
+                onChange={() => setShowRevenue(prev => !prev)}
+            />
+            Show Revenue
+            </label>
+        </div>
+
+        {/* Flavor Charts Container */}
+        <div className="flavor-charts-container">
+            {Object.keys(data).map(flavor => (
+                <div key={flavor} className="chart-container">
+                    <h3>{flavor}</h3>
+                    <TimeFoodItemBarChart data={data[flavor]} showVolume={showVolume} showRevenue={showRevenue} />
+                </div>
+            ))}
+        </div>
     </div>
   );
 };

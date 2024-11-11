@@ -16,7 +16,7 @@ const InventoryManagement = lazy(() => import('./components/InventoryManagement'
 // Import the reports-related pages
 const ReportsOptionsPage = lazy(() => import('./pages/reports/ReportsPage'));
 const FlavorReportPage = lazy(() => import('./pages/reports/FlavorReportPage'));
-const ToppingsReportPage = lazy(() => import('./pages/reports/ToppingReportPage'));
+const ToppingReportPage = lazy(() => import('./pages/reports/ToppingReportPage'));
 const ItemAggregateReportPage = lazy(() => import('./pages/reports/ItemAggregateReportPage'));
 
 function App() {
@@ -77,7 +77,7 @@ function App() {
               path="/reports/topping-monthly-sales" 
               element={
                 <ProtectedRoute allowedRole="admin">
-                  <ToppingsReportPage />
+                  <ToppingReportPage />
                 </ProtectedRoute>
               } 
             />

@@ -9,7 +9,7 @@ const ReportsOptionsPage = () => {
         <Link to="/reports/flavor-monthly-sales">
           <button>Flavor Monthly Sales</button>
         </Link>
-        <Link to="/reports/toppings-monthly-sales">
+        <Link to="/reports/topping-monthly-sales">
           <button>Toppings Monthly Sales</button>
         </Link>
         <Link to="/reports/item-aggregate">
