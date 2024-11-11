@@ -1,0 +1,45 @@
+.home {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem;
+    background: #fbe4c8;
+    margin-top: 70px
+  }
+  
+  .home-text {
+    max-width: 50%;
+  }
+  
+  .home-text h1 {
+    font-size: 2.5rem;
+    color: #6b3e26;
+    margin-top: -70px;
+  }
+  
+  .home-text p {
+    margin: 1rem 0;
+    font-size: 1.2rem; }
+  
+  
+  .cta-btn {
+    padding: 0.8rem 2rem;
+    background: #6b3e26;
+    color: #fff;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 10px;
+    margin-left: 50px;
+  }
+  
+  .cta-btn:hover {
+    background: #925b3d;
+  }
+  
+  .home-image img {
+    max-width: 60%;
+    border-radius: 10px;
+  }
+  

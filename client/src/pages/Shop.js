@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import './Shop.css'
 
 const Shop = () => {
   const [items, setItems] = useState([]);
@@ -46,27 +47,15 @@ const Shop = () => {
 
   return (
     <div style={{ padding: '20px' }}>
-      <h1 style={{ textAlign: 'center', marginBottom: '20px', fontSize: '24px' }}>Our Menu</h1>
+      <h1 style={{ textAlign: 'center', marginBottom: '0px', marginTop: '5.4rem', fontSize: '30px' }}>Our Menu</h1>
       
       {/* Grid of items */}
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
-        gap: '20px',
-        padding: '20px'
-      }}>
+      <div className = 'grid-container'>
         {items.map((item) => (
           <div key={item.Item_ID}>
             {/* Item Card */}
-            <div 
-              onClick={() => handleItemClick(item)}
-              style={{
-                border: '1px solid #ddd',
-                borderRadius: '8px',
-                overflow: 'hidden',
-                cursor: 'pointer',
-                backgroundColor: selectedItem?.Item_ID === item.Item_ID ? '#f0f0f0' : 'white'
-              }}
+            <div onClick={() => handleItemClick(item)} 
+                className={`item-card ${selectedItem?.Item_ID === item.Item_ID ? 'selected' : ''}`}
             >
               {/* Item Image */}
               <img 
@@ -80,6 +69,7 @@ const Shop = () => {
               />
               
               {/* Item Info */}
+
               <div style={{ padding: '15px' }}>
                 <h3 style={{ marginBottom: '10px', fontSize: '18px' }}>{item.Item_Name}</h3>
                 <p style={{ color: '#666' }}>${item.Unit_Price}</p>
@@ -87,18 +77,15 @@ const Shop = () => {
 
               {/* Item Details (shows when selected) */}
               {selectedItem?.Item_ID === item.Item_ID && itemDetails && (
-                <div style={{ 
-                  padding: '15px',
-                  borderTop: '1px solid #ddd',
-                  backgroundColor: '#f8f8f8'
-                }}>
-                  <h4 style={{ marginBottom: '10px', fontSize: '16px' }}>Nutrition Facts</h4>
-                  <p>Calories: {itemDetails.Calories}</p>
-                  <p>Protein: {itemDetails.Protein}g</p>
-                  <p>Sugar: {itemDetails.Sugar}g</p>
-                  <p>Total Carbs: {itemDetails.Total_Carbs}g</p>
-                  <p>Total Fat: {itemDetails.Total_Fat}g</p>
+                <div className="item-details">
+                  <h4>Nutrition Facts</h4>
+                    <p>Calories: {itemDetails.Calories}</p>
+                    <p>Protein: {itemDetails.Protein}g</p>
+                    <p>Sugar: {itemDetails.Sugar}g</p>
+                    <p>Total Carbs: {itemDetails.Total_Carbs}g</p>
+                    <p>Total Fat: {itemDetails.Total_Fat}g</p>
                 </div>
+              
               )}
             </div>
           </div>
