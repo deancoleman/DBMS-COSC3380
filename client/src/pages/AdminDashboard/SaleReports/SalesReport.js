@@ -41,7 +41,7 @@ const SalesReport = () => {
 
   useEffect(() => {
     fetchSalesData();
-  }, []); // Only fetch on mount
+  }, []); 
 
   if (loading) return <div className="p-4">Loading sales data...</div>;
   if (error) return <div className="p-4 text-red-500">{error}</div>;
