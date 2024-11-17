@@ -62,6 +62,9 @@ const Navbar = () => {
               <div className="dropdown-content">
                 <Link to="/admin/reports/sales">Sales Report</Link>
                 <Link to="/admin/reports/inventory">Inventory Report</Link>
+                <Link to="/admin/reports/monthly-sales">Monthly Flavor Sales</Link>
+                <Link to="/admin/reports/monthly-topping-sales">Monthly Topping Sales</Link>
+                <Link to="/admin/reports/item-aggregate">Aggregate Sales</Link>
               </div>
             </div>
             <button onClick={handleLogout} className="logout-btn">Logout</button>

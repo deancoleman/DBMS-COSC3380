@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { initialize } from './utils/reactGA';
-import FourOFour from './components/404/FourOFour'
+import FourOFour from './components/404/FourOFour';
 import ProtectedRoute from './components/ProtectedRoute';
 
 const NavBar = lazy(() => import('./components/Navbar/Navbar'));
@@ -18,6 +18,9 @@ const OrderConfirmation = lazy(() => import('./components/Checkout/OrderConfirma
 const Reports = lazy(() => import('./pages/AdminDashboard/SaleReports/Reports'));
 const InventoryReport = lazy(() => import('./pages/AdminDashboard/SaleReports/InventoryReport'));
 const SalesReport = lazy(() => import('./pages/AdminDashboard/SaleReports/SalesReport'));
+const MonthlyFlavorSales = lazy(() => import('./pages/AdminDashboard/SaleReports/FlavorReportPage'));
+const MonthlyToppingSales = lazy(() => import('./pages/AdminDashboard/SaleReports/ToppingReportPage'));
+const AggregateSales = lazy(() => import('./pages/AdminDashboard/SaleReports/ItemAggregateReportPage'));
 function App() {
   initialize();
 
@@ -122,9 +125,42 @@ function App() {
                 <ProtectedRoute allowedRole="admin">
                   <InventoryManagement />
                 </ProtectedRoute>
-              }
+              } 
             />
-
+            
+            {/* Admin Reports Routes */}
+            <Route 
+              path="/reports" 
+              element={
+                <ProtectedRoute allowedRole="admin">
+                  <ReportsOptionsPage />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/reports/flavor-monthly-sales" 
+              element={
+                <ProtectedRoute allowedRole="admin">
+                  <FlavorReportPage />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/reports/topping-monthly-sales" 
+              element={
+                <ProtectedRoute allowedRole="admin">
+                  <ToppingReportPage />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/reports/item-aggregate" 
+              element={
+                <ProtectedRoute allowedRole="admin">
+                  <ItemAggregateReportPage />
+                </ProtectedRoute>
+              } 
+            />
             {/* Add Reports Routes */}
             <Route
               path="/admin/reports"

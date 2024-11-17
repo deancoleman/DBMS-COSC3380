@@ -69,6 +69,101 @@ class ReportService {
             throw new Error(REPORT_ERRORS.INVENTORY_REPORT_ERROR);
         }
     }
+    static async getMonthlyFlavorSales(flavor, startDate, endDate) {
+        try {
+            const [rows] = await pool.query(
+                reportQueries.getMonthlyFlavorSales,
+                [flavor, startDate, endDate]
+            );
+            return rows;
+        } catch (error) {
+            console.error('Error in getMonthlyFlavorSales:', error);
+            throw new Error('Failed to generate monthly flavor sales report');
+        }
+    }
+
+    static async getMonthlyToppingSales(topping, startDate, endDate) {
+        try {
+            const [rows] = await pool.query(
+                reportQueries.getMonthlyToppingSales,
+                [topping, startDate, endDate]
+            );
+            return rows;
+        } catch (error) {
+            console.error('Error in getMonthlyToppingSales:', error);
+            throw new Error('Failed to generate monthly topping sales report');
+        }
+    }
+
+    static async getItemAggregateSales(itemType, startDate, endDate) {
+        try {
+            const [rows] = await pool.query(
+                reportQueries.getItemAggregateSales,
+                [itemType, startDate, endDate]
+            );
+            return rows;
+        } catch (error) {
+            console.error('Error in getItemAggregateSales:', error);
+            throw new Error('Failed to generate item aggregate sales report');
+        }
+    }
+
+    static async getAggregateFlavorSales(startDate, endDate) {
+        try {
+            const [rows] = await pool.query(
+                reportQueries.getAggregateFlavorSales,
+                [startDate, endDate]
+            );
+            return rows;
+        } catch (error) {
+            console.error('Error in getAggregateFlavorSales:', error);
+            throw new Error('Failed to generate aggregate flavor sales report');
+        }
+    }
+
+    static async getAggregateToppingSales(startDate, endDate) {
+        try {
+            const [rows] = await pool.query(
+                reportQueries.getAggregateToppingSales,
+                [startDate, endDate]
+            );
+            return rows;
+        } catch (error) {
+            console.error('Error in getAggregateToppingSales:', error);
+            throw new Error('Failed to generate aggregate topping sales report');
+        }
+    }
+
+    static async getFlavors() {
+        try {
+            const [rows] = await pool.query(reportQueries.getFlavors);
+            return rows.map(row => row.Item_Name);
+        } catch (error) {
+            console.error('Error in getFlavors:', error);
+            throw new Error('Failed to fetch flavors');
+        }
+    }
+
+    static async getToppings() {
+        try {
+            const [rows] = await pool.query(reportQueries.getToppings);
+            return rows.map(row => row.Item_Name);
+        } catch (error) {
+            console.error('Error in getToppings:', error);
+            throw new Error('Failed to fetch toppings');
+        }
+    }
+
+    static async getFlavorToppingHeatmap(startDate, endDate) {
+        const query = reportQueries.getFlavorToppingHeatmap;
+        try {
+            const [rows] = await pool.query(query, [startDate, endDate]);
+            return rows;
+        } catch (error) {
+            console.error('Error in getFlavorToppingHeatmap:', error);
+            throw new Error('Failed to generate flavor-topping heatmap');
+        }
+    }
 }
 
 module.exports = ReportService;
