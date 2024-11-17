@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -14,57 +14,79 @@ const Navbar = () => {
   // Guest Navigation (Not Logged In)
   if (!userRole) {
     return (
-      <nav>
-        <div>
-          <Link to="/" className="nav-link">Ice Cream Shop</Link>
-          <div>
-          <Link to="/" className="nav-link">Home</Link>
-          <Link to="/shop" className="nav-link">Shop</Link>
-          <Link to="/about" className="nav-link">About Us</Link>
-          <Link to="/login" className="nav-link">Login</Link>
+      <header className="header">
+        <nav className="navbar">
+          <NavLink to="/" className="nav-logo">insert logo</NavLink>
+          <div className="nav-items">
+            <Link to="/">Home</Link>
+            <Link to="/shop">Shop</Link>
+            <Link to="/about">About Us</Link>
+            <Link to="/login">Login</Link>
+            <Link to="/cart">Cart</Link>
           </div>
-        </div>
-      </nav>
+        </nav>
+      </header>
     );
   }
 
   // Customer Navigation
   if (userRole === 'customer') {
     return (
-      <nav>
-        <div>
-          <Link to="/" className="nav-link">Ice Cream Shop</Link>
-
-          <div>
+      <header className="header">
+        <nav className="navbar">
+          <NavLink to="/" className="nav-logo">Ice Cream Shop</NavLink>
+          <div className="nav-items">
             <Link to="/">Home</Link>
-            <Link to="/shop" className="nav-link">Shop</Link>
-            <Link to="/about" className="nav-link">About Us</Link>
-            <Link to="/customer/dashboard" className="nav-link">My Account</Link>
-            {/* Add cart link if you have shopping cart feature */}
-            {/* <Link to="/cart">Cart</Link> */}
-            <button onClick={handleLogout}>Logout</button>
+            <Link to="/shop">Shop</Link>
+            <Link to="/about">About Us</Link>
+            <Link to="/customer/dashboard">My Account</Link>
+            <Link to="/cart">Cart</Link>
+            <button onClick={handleLogout} className="logout-btn">Logout</button>
           </div>
-        </div>
-      </nav>
+        </nav>
+      </header>
     );
   }
 
   // Admin Navigation
   if (userRole === 'admin') {
     return (
-      <nav>
-        <div>
-          <Link to="/" className="nav-link">Ice Cream Shop</Link>
-
-          <div>
-            <Link to="/" className="nav-link">Home</Link>
-            <Link to="/admin/dashboard" className="nav-link">Manage Products</Link>
-            <Link to="/vendors" className="nav-link">Vendors</Link>
-            <Link to="/reports" className="nav-link">Reports</Link>
-            <button onClick={handleLogout}>Logout</button>
+      <header className="header">
+        <nav className="navbar">
+          <NavLink to="/" className="nav-logo">Ice Cream Shop</NavLink>
+          <div className="nav-items">
+            <Link to="/">Home</Link>
+            <Link to="/admin/dashboard">Inventory</Link>
+            <div className="dropdown">
+              <span className="nav-link">Reports</span>
+              <div className="dropdown-content">
+                <Link to="/admin/reports/sales">Sales Report</Link>
+                <Link to="/admin/reports/inventory">Inventory Report</Link>
+                <Link to="/admin/reports/monthly-sales">Monthly Flavor Sales</Link>
+                <Link to="/admin/reports/monthly-topping-sales">Monthly Topping Sales</Link>
+                <Link to="/admin/reports/item-aggregate">Aggregate Sales</Link>
+              </div>
+            </div>
+            <button onClick={handleLogout} className="logout-btn">Logout</button>
           </div>
-        </div>
-      </nav>
+        </nav>
+      </header>
+    );
+  }
+
+  // Employee Navigation
+  if (userRole === 'employee') {
+    return (
+      <header className="header">
+        <nav className="navbar">
+          <NavLink to="/" className="nav-logo">Ice Cream Shop</NavLink>
+          <div className="nav-items">
+            <Link to="/">Home</Link>
+            <Link to="/employee/dashboard">Inventory</Link>
+            <button onClick={handleLogout} className="logout-btn">Logout</button>
+          </div>
+        </nav>
+      </header>
     );
   }
 };

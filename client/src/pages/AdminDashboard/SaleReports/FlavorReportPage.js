@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import TimeFoodItemBarChart from '../../components/charts/TimeFoodItemBarChart';
+import TimeFoodItemBarChart from '../../../components/charts/TimeFoodItemBarChart';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { reportService } from '../../api/services/report.service';
+import { reportService } from '../../../api/services/report.service';
 import './FlavorReportPage.css';
 
 const FlavorReportPage = () => {
