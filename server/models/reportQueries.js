@@ -44,6 +44,92 @@ const reportQueries = {
         AND il.Action_Date BETWEEN ? AND ?
         GROUP BY i.Item_ID, i.Item_Name, i.Quantity
         ORDER BY i.Item_Name
+    `,
+
+    getMonthlyFlavorSales: `
+        SELECT 
+            FlavorName, 
+            Year, 
+            Month, 
+            TotalVolume AS TotalSold, 
+            TotalRevenue AS TotalRevenue
+        FROM 
+            MonthlyFlavorSales
+        WHERE 
+            FlavorName = ?
+            AND CONCAT(Year, '-', LPAD(Month, 2, '0'), '-01') BETWEEN ? AND ?
+        ORDER BY 
+            FlavorName, Year, Month;
+    `,
+
+    getMonthlyToppingSales: `
+        SELECT 
+            ToppingName, 
+            Year, 
+            Month, 
+            TotalVolume AS TotalSold, 
+            TotalRevenue AS TotalRevenue
+        FROM 
+            MonthlyToppingSales
+        WHERE 
+            ToppingName = ?
+            AND CONCAT(Year, '-', LPAD(Month, 2, '0'), '-01') BETWEEN ? AND ?
+        ORDER BY 
+            ToppingName, Year, Month;
+    `,
+
+    getItemAggregateSales: `
+        SELECT 
+            Item_Name AS ItemName,
+            SUM(total_volume) AS totalSold,
+            SUM(total_revenue) AS totalRevenue
+        FROM 
+            MonthlyItemSales
+        WHERE 
+            Item_Type = ? 
+            AND CONCAT(year, '-', LPAD(month, 2, '0'), '-01') BETWEEN ? AND ?
+        GROUP BY 
+            Item_Name
+        ORDER BY 
+            totalSold DESC;
+    `,
+    getAggregateFlavorSales: `
+        SELECT 
+            FlavorName, 
+            SUM(TotalVolume) AS TotalVolume, 
+            SUM(TotalRevenue) AS TotalRevenue
+        FROM 
+            FlavorSalesAggregate
+        JOIN
+            \`Transaction\` t ON t.Date BETWEEN ? AND ?
+        GROUP BY 
+            FlavorName
+        ORDER BY 
+            TotalVolume DESC;
+    `,
+    getAggregateToppingSales: `
+        SELECT 
+            ToppingName, 
+            SUM(TotalVolume) AS TotalVolume, 
+            SUM(TotalRevenue) AS TotalRevenue
+        FROM 
+            ToppingSalesAggregate
+        JOIN
+            \`Transaction\` t ON t.Date BETWEEN ? AND ?
+        GROUP BY 
+            ToppingName
+        ORDER BY 
+            TotalVolume DESC;
+    `,
+    getToppings: `
+        SELECT DISTINCT Item_Name 
+        FROM Item 
+        WHERE Item_Type = "topping"
+    `,
+    getFlavors: `
+        SELECT DISTINCT Item_Name 
+        FROM Item 
+        WHERE Item_Type = "flavor"
     `
 };
 
